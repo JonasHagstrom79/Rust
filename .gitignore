@@ -1,0 +1,18 @@
+# Compiled files
+/target/
+
+# Remove documentation folder
+/doc/
+
+# Remove Cargo lock file unless you are building a library
+/Cargo.lock
+
+# Artifacts from build tools
+**/*.rs.bk
+
+# IDE-related files
+.idea/
+*.vscode/
+*.swp
+*.swo
+.DS_Store
