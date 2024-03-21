@@ -86,6 +86,12 @@ fn main() {
     let str = "Function call with a variable"; // str is a string
     my_function(str); // This will print: Function call with a variable
     let result: (i32, i32, i32, f32, i32) = basic_math(10, 20);
+
+    let full_name: String = {
+        let first_name = "John";
+        let last_name = "Doe";
+        format!("{} {}", first_name, last_name)
+    };
 }
 
 // Function definition
