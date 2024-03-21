@@ -57,4 +57,35 @@ fn main() {
     let h: i32 = 10; // h is of type i32
     let i: f64 = h as f64; // This will convert h to f64
     println!("i is {}", i); // This will print: i is 10.0
+
+    // &str and String
+    let fixed_string: &str = "Fixed length string"; // &str is a fixed length string
+    let flexible_string: String = String::from("this string will grow"); // String is a growable string, removed mut as it's not mutated
+    println!("j is {}", fixed_string); // This will print: j is Fixed length string
+    println!("k is {}", flexible_string); // Corrected variable name to flexible_string
+                                          // Arrays
+    let mut array_1 = [1, 2, 3, 4, 5]; // array_1 is an array of integers
+    let mut array_2 = [0; 5]; // array_2 is an array of 5 zeros
+    let mut array_3 = [1, 2, 3, 4, 5]; // array_3 is an array of integers
+    let mut array_4 = [0; 5]; // array_4 is an array of 5 zeros
+
+    // vectors
+    let mut vector_1 = vec![1, 2, 3, 4, 5]; // vector_1 is a vector of integers
+    let mut vector_2 = vec![0; 5]; // vector_2 is a vector of 5 zeros
+
+    // Tuples
+    let tuple_1 = (1, 2, 3, 4, 5); // tuple_1 is a tuple of integers
+    let tuple_2 = (1, "hello", 3.14, true); // tuple_2 is a tuple of different types
+    let (x, y, z, a, b) = tuple_1; // destructuring a tuple
+    let my_info = ("salary", 1000, "Age", 20); // my_info is a tuple
+    let (salary_label, salary_value, age_label, age_value) = my_info; // Corrected destructuring
+
+    let unit = (); // unit is a tuple with no elements
+
+    my_function("This is my function"); // This will print: Hello, World!
+}
+
+// Function definition
+fn my_function(s: &str) {
+    println!("{s}"); // This will print the value of s
 }
