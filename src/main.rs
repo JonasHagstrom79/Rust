@@ -83,9 +83,27 @@ fn main() {
     let unit = (); // unit is a tuple with no elements
 
     my_function("This is my function"); // This will print: Hello, World!
+    let str = "Function call with a variable"; // str is a string
+    my_function(str); // This will print: Function call with a variable
+    let result: (i32, i32, i32, f32, i32) = basic_math(10, 20);
 }
 
 // Function definition
 fn my_function(s: &str) {
     println!("{s}"); // This will print the value of s
+}
+
+fn multiolication(a: i32, b: i32) -> i32 {
+    println!("{} * {} = {}", a, b, a * b); // This will print: a * b = a * b
+    a * b
+}
+
+fn basic_math(a: i32, b: i32) -> (i32, i32, i32, f32, i32) {
+    let sum = a + b; // sum is the sum of a and b
+    let difference = a - b; // difference is the difference of a and b
+    let product = a * b; // product is the product of a and b
+    let quotient = a as f32 / b as f32; // quotient is the quotient of a and b, cast to f32 for floating-point division
+    let remainder = a % b; // remainder is the remainder of a and b
+
+    return (sum, difference, product, quotient, remainder);
 }
