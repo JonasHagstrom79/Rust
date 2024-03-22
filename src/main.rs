@@ -92,6 +92,8 @@ fn main() {
         let last_name = "Doe";
         format!("{} {}", first_name, last_name)
     };
+
+    check_marks(85); // Example usage of the check_marks function
 }
 
 // Function definition
@@ -112,4 +114,14 @@ fn basic_math(a: i32, b: i32) -> (i32, i32, i32, f32, i32) {
     let remainder = a % b; // remainder is the remainder of a and b
 
     return (sum, difference, product, quotient, remainder);
+}
+
+fn check_marks(marks: u32) {
+    match marks {
+        0..=40 => println!("Fail"),          // marks between 0 and 40
+        41..=60 => println!("Pass"),         // marks between 41 and 60
+        61..=75 => println!("Merit"),        // marks between 61 and 75
+        76..=100 => println!("Distinction"), // marks between 76 and 100
+        _ => println!("Invalid marks"),      // marks less than 0 or greater than 100
+    }
 }
