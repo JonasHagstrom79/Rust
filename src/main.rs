@@ -94,8 +94,17 @@ fn main() {
     };
 
     check_marks(85); // Example usage of the check_marks function
-}
 
+    let mut n = String::new();
+    std::io::stdin()
+        .read_line(&mut n)
+        .expect("Failed to read line");
+
+    let mut n = String::new();
+    std::io::stdin()
+        .read_line(&mut n)
+        .expect("Failed to read line");
+}
 // Function definition
 fn my_function(s: &str) {
     println!("{s}"); // This will print the value of s
