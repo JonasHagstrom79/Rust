@@ -93,7 +93,8 @@ fn main() {
         format!("{} {}", first_name, last_name)
     };
 
-    check_marks(85); // Example usage of the check_marks function
+    check_marks(85);
+    // Example usage of the check_marks function
 
     let mut n = String::new();
     std::io::stdin()
@@ -104,7 +105,82 @@ fn main() {
     std::io::stdin()
         .read_line(&mut n)
         .expect("Failed to read line");
+
+    //---------------------------------------------------
+    //                  Ownership Basics
+    //------------------------------------------------
+
+    /*
+    1. Each value has a variable thats's its "owner"
+    2. There can only be one owner at a time
+    3. When the owner goes out of scope, the value is cleaned up
+    */
+
+    let s1 = String::from("hello"); // s1 is the owner of the string "hello"
+    let s2 = s1.clone(); // s2 is now the owner of the cloned string "hello"
+    println!("{s2}"); // This will print: hello
+    println!("{s1}"); // This will print: hello
+
+    let s = String::from("hello"); // s is the owner of the string "hello"
+    my_function(&s); // This will print: hello
+    println!("{s}"); // This will print: hello
+
+    let a = 10; // a is an integer
+    let b = 20; // b is an integer
+    let result = multiolication(a, b); // result is the product of a and b
+    println!("{result}"); // This will print: 200
+
+    let (sum, difference, product, quotient, remainder) = basic_math(10, 20);
+    println!("Sum: {sum}"); // This will print: Sum: 30
+    println!("Difference: {difference}"); // This will print: Difference: -10
+    println!("Product: {product}"); // This will print: Product: 200
+    println!("Quotient: {quotient}"); // This will print: Quotient: 0.5
+    println!("Remainder: {remainder}"); // This will print: Remainder: 10
+
+    let traveler_number: u64 = 282369289;
+    // Exempel på traveler number
+    match find_xy_for_traveler_number(traveler_number) {
+        Some((x, y)) => println!("Hittade en matchning: x = {}, y = {}", x, y),
+        None => println!("Ingen matchning hittades inom den angivna gränsen."),
+    }
+
+    //---------------------------------------------------
+    //                  Ownership in Functions
+    //---------------------------------------------------
+
+    let vec_1 = vec![1, 2, 3, 4, 5]; // vec_1 is a vector of integers
+    takes_ownership(vec_1); // Ownership of vec_1 is transferred to the function
+
+    let vec_2 = gives_ownership(); // Ownership of the returned vector is transferred to vec_2
 }
+
+fn takes_and_gives_ownership(mut vec: Vec<i32>) -> Vec<i32> {
+    vec.push(10); // This will add 10 to the vector
+    vec // Ownership of the vector is transferred to the caller
+}
+
+fn takes_ownership(vec: Vec<i32>) {
+    println!("vec is: {:?}", vec); // This will print the vector
+}
+
+fn gives_ownership() -> Vec<i32> {
+    vec![4, 5, 6]
+}
+
+fn find_xy_for_traveler_number(traveler_number: u64) -> Option<(i32, i32)> {
+    let max_limit = 100; // Sätt en övre gräns för sökningen
+
+    for x in 0..max_limit {
+        for y in 0..max_limit {
+            if 3u64.pow(x) * 2u64.pow(5 * y) == traveler_number {
+                // Konvertera x och y till i32 här
+                return Some((x as i32, y as i32));
+            }
+        }
+    }
+    None // Returnera None om ingen matchning hittas
+}
+
 // Function definition
 fn my_function(s: &str) {
     println!("{s}"); // This will print the value of s
