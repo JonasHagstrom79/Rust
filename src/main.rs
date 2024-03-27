@@ -187,6 +187,16 @@ fn main() {
                                // Better to pass a reference to vec_9 into the function, cheaper than cloning
     let ref9 = &vec_9; // ref9 is a reference to vec_9
     borrows_vec(ref9); // vec_9 is borrowed by the function
+
+    //---------------------------------------------------
+    //            Dereferencing
+    //---------------------------------------------------
+
+    let mut some_data = 42; // some_data is an integer
+    let ref_1 = &some_data; // ref1 is a reference to some_data
+    let deref_copy = *ref_1; // deref_copy is a copy of some_data
+    println!("some_data is: {some_data}, dref_copy is: {deref_copy}"); // This will print: 42
+                                                                       // 28 2:53
 }
 
 fn takes_and_gives_ownership(mut vec: Vec<i32>) -> Vec<i32> {
