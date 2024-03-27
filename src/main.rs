@@ -172,12 +172,30 @@ fn main() {
     let ref1 = &vec_1; // ref1 is a mutable reference to vec_1
     let ref2 = &vec_1; // ref2 is a mutable reference to vec_1
     println!("ref1: {:?}, ref2: {:?}", ref1, ref2); // This will print: ref1: [4, 5, 6], ref2: [4, 5, 6]
-                                                    //26
+
+    //--------------------------------------------------
+    //          Borrowing in Functions
+    //--------------------------------------------------
+
+    /*
+    - Borrowing Rules
+        - At any time, you can have either one mutable reference or any number of immutable references.
+        - Refernces must always be valid.
+     */
+
+    let vec_9 = vec![1, 2, 3]; // vec_9 is a vector of integers
+                               // Better to pass a reference to vec_9 into the function, cheaper than cloning
+    let ref9 = &vec_9; // ref9 is a reference to vec_9
+    borrows_vec(ref9); // vec_9 is borrowed by the function
 }
 
 fn takes_and_gives_ownership(mut vec: Vec<i32>) -> Vec<i32> {
     vec.push(10); // This will add 10 to the vector
     vec // Ownership of the vector is transferred to the caller
+}
+
+fn borrows_vec(vec: &Vec<i32>) {
+    println!("vec is: {:?}", vec); // This will print the vector
 }
 
 fn takes_ownership(vec: Vec<i32>) {
