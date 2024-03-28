@@ -196,7 +196,7 @@ fn main() {
     let ref_1 = &some_data; // ref1 is a reference to some_data
     let deref_copy = *ref_1; // deref_copy is a copy of some_data
     println!("some_data is: {some_data}, dref_copy is: {deref_copy}"); // This will print: 42
-                                                                       // 28 2:53
+                                                                       // 29 0:04                                                                    // 28 2:53
 }
 
 fn takes_and_gives_ownership(mut vec: Vec<i32>) -> Vec<i32> {
