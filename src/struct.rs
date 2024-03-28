@@ -18,6 +18,23 @@ impl Car {
         println!("Fuel Level: {}", self.fuel_level);
         println!("Price: {}", self.price);
     }
+
+    fn refuel(&mut self, fuel: f32) {
+        self.fuel_level += fuel;
+    }
+
+    fn sell(self, new_owner: String) -> Car {
+        self
+    }
+
+    fn new(name: String, year: u32) -> Car {
+        Car {
+            owner: name,
+            year: year,
+            fuel_level: 0.0,
+            price: 0,
+        }
+    }
 }
 
 fn display_car_info(car: &Car) {
@@ -55,4 +72,6 @@ fn main() {
     let point_3 = Point4D(1, 2, 3, 4);
 
     my_car.display_car_info();
+    let new_car = Car::new("John Doe".to_string(), 2010);
+    new_car.display_car_info();
 }
