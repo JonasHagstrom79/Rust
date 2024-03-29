@@ -144,59 +144,7 @@ fn main() {
         None => println!("Ingen matchning hittades inom den angivna gränsen."),
     }
 
-    //---------------------------------------------------
-    //                  Ownership in Functions
-    //---------------------------------------------------
-
-    let vec_1 = vec![1, 2, 3, 4, 5]; // vec_1 is a vector of integers
-    takes_ownership(vec_1); // Ownership of vec_1 is transferred to the function
-
-    let vec_2 = gives_ownership(); // Ownership of the returned vector is transferred to vec_2
-
-    let mut vec_3 = vec![1, 2, 3, 4, 5]; // vec_3 is a vector of integers
-    takes_and_gives_ownership(vec_3); // Ownership of vec_3 is transferred to the function
-
-    //---------------------------------------------------
-    //                  Borrowing
-    //---------------------------------------------------
-    /* Borrowing Rules
-        - At any time, you can have either one mutable reference or any number of immutable references.
-        - Refernces must always be valid.
-
-    - Solve out two problems
-        - Data race
-        - Dangling references
-     */
-
-    let mut vec_1 = vec![4, 5, 6]; // vec_1 is a vector of integers
-    let ref1 = &vec_1; // ref1 is a mutable reference to vec_1
-    let ref2 = &vec_1; // ref2 is a mutable reference to vec_1
-    println!("ref1: {:?}, ref2: {:?}", ref1, ref2); // This will print: ref1: [4, 5, 6], ref2: [4, 5, 6]
-
-    //--------------------------------------------------
-    //          Borrowing in Functions
-    //--------------------------------------------------
-
-    /*
-    - Borrowing Rules
-        - At any time, you can have either one mutable reference or any number of immutable references.
-        - Refernces must always be valid.
-     */
-
-    let vec_9 = vec![1, 2, 3]; // vec_9 is a vector of integers
-                               // Better to pass a reference to vec_9 into the function, cheaper than cloning
-    let ref9 = &vec_9; // ref9 is a reference to vec_9
-    borrows_vec(ref9); // vec_9 is borrowed by the function
-
-    //---------------------------------------------------
-    //            Dereferencing
-    //---------------------------------------------------
-
-    let mut some_data = 42; // some_data is an integer
-    let ref_1 = &some_data; // ref1 is a reference to some_data
-    let deref_copy = *ref_1; // deref_copy is a copy of some_data
-    println!("some_data is: {some_data}, dref_copy is: {deref_copy}"); // This will print: 42
-                                                                       // 29 0:04                                                                    // 28 2:53
+    // 29 0:04                                                                    // 28 2:53
 }
 
 fn takes_and_gives_ownership(mut vec: Vec<i32>) -> Vec<i32> {
