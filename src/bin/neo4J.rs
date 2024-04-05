@@ -1,24 +1,46 @@
-// Import everything from the neo4rs crate, which is likely used for Neo4j database interactions.
 use neo4rs::*;
-// Import the `env` module from the standard library for environment variable access.
 use std::env;
-// Import the StreamExt trait to enable additional methods on Stream types, likely for asynchronous stream processing.
 use tokio_stream::StreamExt;
 
-// This attribute marks the main function to be run in an asynchronous context provided by Tokio.
 #[tokio::main]
 async fn main() {
-    // Attempt to load environment variables from a `.env` file, ignoring any errors if the file does not exist.
+    // Ladda variabler från .env-filen
     dotenv::dotenv().ok();
 
-    // Attempt to retrieve the value of the environment variable "MY_SECRET_KEY".
-    // If it's not set, the program will panic with the message "Expected a secret key".
-    let my_secret_key = std::env::var("MY_SECRET_KEY").expect("Expected a secret key");
+    // Läs in användarnamn och lösenord från miljövariabler
+    let username = env::var("NEO4J_USERNAME").unwrap_or("Not Found".to_string());
+    let password = env::var("NEO4J_PW").unwrap_or("Not Found".to_string());
 
-    // Match on the result of attempting to retrieve "MY_SECRET_KEY" again, for demonstration.
-    // If the variable is found, print its value. If not, print an error message.
-    match env::var("MY_SECRET_KEY") {
-        Ok(value) => println!("Värdet av MY_SECRET_KEY är: {}", value),
-        Err(e) => println!("Kunde inte läsa MY_SECRET_KEY: {}", e),
+    // Skapa en Graph-anslutning med de inlästa värdena
+    let graph = Graph::new("bolt://localhost:7687", &username, &password)
+        .await
+        .expect("Kunde inte ansluta till databasen");
+
+    // Din Cypher-fråga
+    let query = r#"
+    MATCH (n)
+    OPTIONAL MATCH (n)-[r]->(m)
+    RETURN n, r, m
+    "#;
+
+    // Kör frågan
+    let mut result = graph
+        .execute(query.into())
+        .await
+        .expect("Kunde inte köra frågan");
+
+    // Iterera över resultaten
+    while let Ok(Some(row)) = result.next().await {
+        let n: Node = row.get("n").unwrap();
+        let r: Option<Relation> = row.get("r").unwrap();
+        let m: Option<Node> = row.get("m").unwrap();
+
+        println!("Node: {:?}", n);
+        if let Some(relation) = r {
+            println!("Relation: {:?}", relation);
+            if let Some(target_node) = m {
+                println!("Target Node: {:?}", target_node);
+            }
+        }
     }
 }
