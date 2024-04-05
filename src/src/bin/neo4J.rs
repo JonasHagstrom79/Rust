@@ -16,12 +16,6 @@ async fn main() {
         .await
         .expect("Kunde inte ansluta till databasen");
 
-    // Kör frågan genom en separat metod
-    run_query(&graph).await;
-}
-
-// Separat asynkron metod för att köra Cypher-frågan
-async fn run_query(graph: &Graph) {
     // Din Cypher-fråga
     let query = r#"
     MATCH (n)
