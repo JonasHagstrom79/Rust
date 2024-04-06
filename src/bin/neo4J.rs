@@ -24,6 +24,30 @@ async fn main() {
     // Example usage of the new method
     // let first_name = "Alice";
     // get_person_by_first_name(&graph, first_name).await;
+
+    // Example usage of add_person function
+    let id = uuid::Uuid::new_v4().to_string();
+    let first_name = "John";
+    let last_name = "Doe";
+    add_person(&graph, &id, first_name, last_name)
+        .await
+        .unwrap();
+}
+
+async fn add_person(
+    graph: &Graph,
+    id: &str,
+    first_name: &str,
+    last_name: &str,
+) -> Result<(), neo4rs::Error> {
+    let query = query("CREATE (p:Person {id: $id, firstName: $firstName, lastName: $lastName})")
+        .param("id", id)
+        .param("firstName", first_name)
+        .param("lastName", last_name);
+
+    graph.run(query).await?;
+
+    Ok(())
 }
 
 // Separate asynchronous method to run the Cypher query
