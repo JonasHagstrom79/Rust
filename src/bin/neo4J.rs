@@ -1,4 +1,9 @@
 // Import necessary crates and modules
+mod db;
+mod handlers;
+mod models;
+mod routes;
+use models::Person;
 use neo4rs::*;
 use std::env;
 use tokio_stream::StreamExt;
@@ -34,7 +39,20 @@ async fn main() {
         .unwrap();
 }
 
-async fn add_person(
+use neo4rs::*;
+
+async fn add_person(graph: &Graph, person: Person) -> Result<(), neo4rs::Error> {
+    let query = query("CREATE (p:Person {id: $id, firstName: $firstName, lastName: $lastName})")
+        .param("id", person.id)
+        .param("firstName", person.first_name)
+        .param("lastName", person.last_name);
+
+    graph.run(query).await?;
+
+    Ok(())
+}
+
+/* async fn add_person(
     graph: &Graph,
     id: &str,
     first_name: &str,
@@ -48,7 +66,7 @@ async fn add_person(
     graph.run(query).await?;
 
     Ok(())
-}
+} */
 
 // Separate asynchronous method to run the Cypher query
 async fn run_query(graph: &Graph) {
