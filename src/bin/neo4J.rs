@@ -11,7 +11,19 @@ use tokio_stream::StreamExt;
 // Entry point for the async application
 #[tokio::main]
 async fn main() {
-    // Load variables from the .env file
+    let cors = warp::cors()
+        .allow_any_origin() // I en produktionsmiljö, specificera tillåtna ursprung istället för att tillåta alla
+        .allow_headers(vec!["Content-Type"])
+        .allow_methods(vec!["POST"]);
+
+    let add_person_route = routes::add_person_route().with(cors);
+
+    warp::serve(add_person_route)
+        .run(([127, 0, 0, 1], 3030))
+        .await;
+
+    // ORIGIN BELOW
+    /*  // Load variables from the .env file
     dotenv::dotenv().ok();
 
     // Read username and password from environment variables
@@ -36,7 +48,7 @@ async fn main() {
     let last_name = "Doe";
     add_person(&graph, &id, first_name, last_name)
         .await
-        .unwrap();
+        .unwrap(); */
 }
 
 use neo4rs::*;
