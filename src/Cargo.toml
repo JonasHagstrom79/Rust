@@ -21,3 +21,7 @@ path = "src/bin/neo4j.rs"
 [[bin]]
 name = "backend"
 path = "src/backend/backend.rs"
+
+[lib]
+name = "neo4j_project" # Ersätt med ditt faktiska biblioteksnamn
+path = "src/lib.rs"
