@@ -6,8 +6,22 @@ document.getElementById('personForm').addEventListener('submit', function(e) {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
         // Samla in andra fält här
-    };
+    };    
+});
 
+function fetchPersons() {
+    fetch('http://localhost:3030/get_persons')
+    .then(response => response.json())
+    .then(data => {
+        console.log('Persons:', data);
+        // Uppdatera din frontend med persondata här
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function createPerson(person) {
     fetch('http://localhost:3030/add_person', {
         method: 'POST',
         headers: {
@@ -20,4 +34,4 @@ document.getElementById('personForm').addEventListener('submit', function(e) {
     .catch((error) => {
         console.error('Error:', error);
     });
-});
+}
