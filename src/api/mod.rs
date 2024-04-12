@@ -16,5 +16,6 @@
 // incoming requests to the appropriate parts of the codebase for processing. Like `handlers`, `routers` can be defined in a
 // `routers.rs` file or a `routers` directory with a `mod.rs` file. It being public means that its functionalities are accessible
 // from outside the `api` module, allowing for integration with other parts of the library or external crates.
-pub mod handlers;
+pub mod controller;
 pub mod routers;
+// Declare other modules within `src/api` here as needed

@@ -13,6 +13,7 @@ tokio-stream = "0.1.5" # Check for the latest version
 dotenv = "0.15.0"
 neo4j = "4.4.32"
 warp = "0.3"
+futures-util = "0.3"
 
 [[bin]]
 name = "neo4J"
