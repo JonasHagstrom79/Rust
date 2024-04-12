@@ -23,6 +23,8 @@ pub async fn run() {
     // retrieving persons, routing each request to the appropriate handler based on the request's URL and method.
     let routes = add_person.or(get_persons);
 
+    println!("Starting server on http://127.0.0.1:3030");
+
     // Starts the warp server on localhost at port 3030, serving the combined routes.
     // The `run` method is an asynchronous operation that will keep running until the server is shut down.
     // It listens for incoming HTTP requests and dispatches them to the appropriate route handlers defined above.

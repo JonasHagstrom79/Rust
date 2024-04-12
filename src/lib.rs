@@ -5,6 +5,8 @@
 // The `api` module is expected to be defined either in a file named `api.rs` in the same directory as this `lib.rs` file,
 // or in a directory named `api` with a `mod.rs` file inside it. This module can contain definitions for functions, structs, enums,
 // and other modules, which are meant to be part of the public API of this library.
+
 pub mod api;
+
 pub mod db;
 pub mod models;

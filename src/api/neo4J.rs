@@ -1,4 +1,4 @@
-use neo4rs::*;
+/* use neo4rs::*;
 use std::env;
 /* use warp::Filter; */
 
@@ -53,4 +53,23 @@ async fn main() {
     /* let routes = add_person.or(get_persons); */
 
     /*  warp::serve(routes).run(([127, 0, 0, 1], 3030)).await; */
+}
+ */
+/* fn main() {
+    println!("Hello, world!");
+}
+ */
+
+// src/main.rs
+
+mod backend;
+
+use crate::backend::run;
+
+#[tokio::main]
+
+async fn main() {
+    env_logger::init();
+    backend::run().await;
+    println!("Hello, world!");
 }
