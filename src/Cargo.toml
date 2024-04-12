@@ -12,7 +12,12 @@ tokio = { version = "1.37", features = ["full"] }
 tokio-stream = "0.1.5" # Check for the latest version
 dotenv = "0.15.0"
 neo4j = "4.4.32"
+warp = "0.3"
 
 [[bin]]
 name = "neo4J"
 path = "src/bin/neo4j.rs"
+
+[[bin]]
+name = "backend"
+path = "src/backend/backend.rs"

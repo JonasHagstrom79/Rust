@@ -1,5 +1,5 @@
-use super::db;
-use super::models::Person;
+use crate::db;
+use crate::models::Person;
 use warp::{http::StatusCode, Rejection, Reply};
 
 pub async fn handle_add_person(person: Person) -> Result<impl Reply, Rejection> {
