@@ -11,6 +11,7 @@ neo4rs = "0.7.1"
 tokio = { version = "1.37", features = ["full"] }
 tokio-stream = "0.1.5" # Check for the latest version
 dotenv = "0.15.0"
+neo4j = "4.4.32"
 
 [[bin]]
 name = "neo4J"
