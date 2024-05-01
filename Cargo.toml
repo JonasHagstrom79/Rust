@@ -15,7 +15,20 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 uuid = { version = "0.8", features = ["v4"] }
 warp = "0.3"
+anyhow = "1.0"
 
 [[bin]]
 name = "neo4J"
 path = "src/bin/neo4j.rs"
+
+[[bin]]
+name = "backend"
+path = "src/backend/backend.rs"
+
+[[bin]]
+name = "main"
+path = "src/api/main.rs"
+
+[lib]
+name = "neo4j_project" # Ersätt med ditt faktiska biblioteksnamn
+path = "src/lib.rs"

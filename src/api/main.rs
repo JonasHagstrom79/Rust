@@ -7,9 +7,8 @@
 mod backend; // This line declares the `backend` module. Rust modules are a way to organize code into namespaces,
              // allowing for better modularity and code reuse. The `backend` module is expected to be defined in a file
              // named `backend.rs` in the same directory as this `main.rs` file, or in a `backend` directory with a `mod.rs` file.
-
-use Rust::backend::run; // This line imports the `run` function from the `backend` module. The `run` function is expected to start
-                        // the web server or perform other backend-related tasks.
+mod error;
+use crate::backend::DbConnection; // This line imports the `DbConnection` struct from the `backend` module.
 
 #[tokio::main] // This attribute macro indicates that the async main function is the entry point of the program,
                // and it uses Tokio as the runtime for executing asynchronous tasks. Tokio is a popular asynchronous
@@ -19,7 +18,11 @@ async fn main() {
     env_logger::init();
     // The `main` function is marked as `async`, which means it can perform asynchronous operations.
     // This is the starting point of the application's execution.
-    backend::run().await; // Here, we call the `run` function from the `backend` module. The `.await` is used to wait
-                          // for the `run` function to complete its execution. The `run` function is expected to be an
-                          // asynchronous function that starts the web server or performs other backend-related tasks.
+    let db_connection = DbConnection::new().await;
+    let first_name = "Johan";
+    match db_connection.get_person_by_first_name(first_name).await {
+        Ok(Some(person)) => println!("Found person: {:?}", person),
+        Ok(None) => println!("No person with the name '{}' exists.", first_name),
+        Err(e) => println!("Error occurred: {}", e),
+    }
 }

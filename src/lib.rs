@@ -7,6 +7,7 @@
 // and other modules, which are meant to be part of the public API of this library.
 
 pub mod api;
-
+pub mod backend;
 pub mod db;
+pub mod error;
 pub mod models;

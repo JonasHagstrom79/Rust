@@ -1,4 +1,6 @@
+use crate::error::AppError;
 use crate::models::Person;
+use anyhow::{self, Result};
 use neo4rs::{Graph, Node, Relation};
 use std::env; // Added import for Graph
 use std::fmt;
@@ -26,6 +28,27 @@ impl DbConnection {
     }
 
     // You can add more methods here to interact with the database using the `graph` field
+    pub async fn get_person_by_first_name(
+        &self,
+        first_name: &str,
+    ) -> Result<Option<Node>, AppError> {
+        let query = neo4rs::query("MATCH (p:Person {firstName: $firstName}) RETURN p")
+            .param("firstName", first_name);
+
+        let mut result = self.graph.execute(query).await.map_err(AppError::from)?;
+        if let Some(row) = result.next().await.map_err(AppError::from)? {
+            let person_result = row
+                .get("p")
+                .map_err(|e| neo4rs::Error::new(format!("Failed to get person: {}", e)))
+                .map_err(AppError::from);
+            match person_result {
+                Ok(person) => Ok(Some(person)),
+                Err(e) => Err(e),
+            }
+        } else {
+            Ok(None)
+        }
+    }
 }
 
 impl Clone for DbConnection {
